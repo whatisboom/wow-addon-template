@@ -1,0 +1,5 @@
+# Libraries are resolved at build time, never committed — except the manifest.
+Libs/*
+!Libs/embeds.xml
+
+.DS_Store
