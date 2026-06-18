@@ -1,0 +1,25 @@
+name: Package and release
+# Tag-driven release via the BigWigs packager (CurseForge / Wago / WoWInterface).
+# Per-addon setup: add the API-token repo secrets for the sites you publish to,
+# and set project IDs (the packager reads ## X-Curse-Project-ID etc. from the
+# .toc, or pass `with: { args: -p <cf-id> -w <wago-id> -u <wowi-id> }`).
+on:
+  push:
+    tags:
+      - 'v*'
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Package and release
+        uses: BigWigsMods/packager@v2
+        env:
+          CF_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
+          WAGO_API_TOKEN: ${{ secrets.WAGO_API_TOKEN }}
+          WOWI_API_TOKEN: ${{ secrets.WOWI_API_TOKEN }}
+          GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
