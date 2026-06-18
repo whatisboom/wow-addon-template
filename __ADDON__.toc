@@ -1,0 +1,11 @@
+## Interface: __INTERFACE_VERSION__
+## Title: __ADDON__
+## Notes: __NOTES__
+## Author: __AUTHOR__
+## Version: @project-version@
+## SavedVariables: __ADDON__DB
+## X-Category: __CATEGORY__
+
+Libs\embeds.xml
+Logic.lua
+Core.lua
