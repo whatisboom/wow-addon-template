@@ -11,10 +11,10 @@ authoritative sources. Never use this file's memory or model training for any
 fact that changes between patches. Resolve, don't assume.**
 
 1. **Interface version.** Resolve the current retail interface number and fill the
-   `## Interface:` marker in `__ADDON__.toc`. Authoritative: the current
-   `Patch 12.0.x/API changes` page on Warcraft Wiki
-   (https://warcraft.wiki.gg/wiki/Portal:API) or the live client TOC. Never invent
-   the number.
+   `## Interface:` marker in `__ADDON__.toc`. Authoritative:
+   https://warcraft.wiki.gg/wiki/Interface_version, the current
+   `Patch 12.0.x/API changes` page (e.g. https://warcraft.wiki.gg/wiki/Patch_12.0.7/API_changes),
+   or the live client TOC. Never invent the number.
 2. **Midnight API restrictions (Interface 12.0+).** Combat data (health, power,
    absorb) is wrapped in **Secret Values** — opaque types you cannot do arithmetic
    on. If this addon touches combat data at all, confirm what is even possible
