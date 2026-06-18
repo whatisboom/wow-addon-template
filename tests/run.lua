@@ -1,6 +1,9 @@
 -- Headless unit test harness. Pure Lua 5.4, no WoW client.
 -- Loads modules the way the .toc feeds varargs: chunk("AddonName", ns).
+-- Run from the repo root: `lua tests/run.lua` (paths below are root-relative).
 local passed, failed = 0, 0
+-- eq() uses Lua == : value equality for primitives, REFERENCE equality for tables.
+-- To compare table contents, assert individual fields instead.
 local function eq(actual, expected, msg)
   if actual == expected then
     passed = passed + 1
@@ -11,6 +14,7 @@ local function eq(actual, expected, msg)
 end
 
 -- Minimal LibStub/AceLocale shim so locale files (added per-addon) load headlessly.
+-- Only AceLocale-3.0 is shimmed; add cases for other libs as needed.
 _G.LibStub = _G.LibStub or setmetatable({}, {
   __call = function(_, name)
     if name == "AceLocale-3.0" then
@@ -31,6 +35,7 @@ local ns = {}
 loadModule("Logic.lua", ns)
 
 local Logic = ns.Logic
+-- fixtures.lua uses plain dofile; it doesn't follow the WoW module (ns) pattern.
 local F = dofile("tests/fixtures.lua")
 
 -- Sample tests proving the harness + module path is green.
