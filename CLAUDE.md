@@ -12,9 +12,9 @@ fact that changes between patches. Resolve, don't assume.**
 
 1. **Interface version.** Resolve the current retail interface number and fill the
    `## Interface:` marker in `__ADDON__.toc`. Authoritative:
-   https://warcraft.wiki.gg/wiki/Interface_version, the current
-   `Patch 12.0.x/API changes` page (e.g. https://warcraft.wiki.gg/wiki/Patch_12.0.7/API_changes),
-   or the live client TOC. Never invent the number.
+   https://warcraft.wiki.gg/wiki/Interface_version, or the current
+   `Patch X.Y.Z/API changes` wiki page for the live retail patch, or the live
+   client TOC. Never invent the number, and never copy a patch number from this file.
 2. **Midnight API restrictions (Interface 12.0+).** Combat data (health, power,
    absorb) is wrapped in **Secret Values** — opaque types you cannot do arithmetic
    on. If this addon touches combat data at all, confirm what is even possible
@@ -31,6 +31,10 @@ Record what you resolved in the addon-specific section below.
 
 ## § Conventions (verify against § RESEARCH, then apply)
 
+- **Substitution markers.** Replace `__ADDON__`, `__AUTHOR__`, `__NOTES__`,
+  `__CATEGORY__`, `__INTERFACE_VERSION__` per-addon. Note `__ADDON__` also composes
+  into `__ADDON__DB` (the SavedVariables name in the `.toc`) and `chunk("__ADDON__", ns)`
+  in `tests/run.lua` — a global replace of `__ADDON__` handles all of them.
 - **Module/namespace pattern.** Every Lua file starts `local ADDON, ns = ...` and
   touches **no WoW globals at file scope** (so the headless tests can load it).
   Cross-module access goes through `ns`. The `.toc` load order matters: libs,
